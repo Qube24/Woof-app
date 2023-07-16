@@ -1,4 +1,4 @@
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, useState, Suspense, useRef } from 'react';
 import { fetchDogs, fetchBreedDogs } from 'components/fetchApi';
 import { Outlet, useSearchParams, useLocation } from 'react-router-dom';
 import Notiflix from 'notiflix';
@@ -6,34 +6,23 @@ import { BackLink } from 'components/BackLink/BackLink';
 import css from './SearchDogsStyle.module.css';
 
 function SearchDogs() {
-  const [isFirstRender, setIsFirstRender] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const [doggie, setDoggie] = useState({});
   const location = useLocation();
 
+  const isMounted = useRef(false);
   const search = searchParams.get('value') ?? '';
   const adjustedSearch = search.trim().toLowerCase();
 
   // componentDidUpdate
-  // useEffect(() => {
-  //   // checking if search return 404 error
-  //   // if (adjustedSearch === '' || adjustedSearch === null) {
-  //   //   return;
-  //   // } else {
-  //   //   showDoggie(adjustedSearch);
-  //   // }
-
-  //   showDoggie(adjustedSearch);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [adjustedSearch]);
-
   useEffect(() => {
-    if (isFirstRender) {
-      setIsFirstRender(false);
-    } else {
-      showDoggie(adjustedSearch);
+    if (!isMounted.current) {
+      isMounted.current = true;
+      return;
     }
-  }, [adjustedSearch, isFirstRender]);
+    showDoggie(adjustedSearch);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [adjustedSearch]);
 
   // function to distinguish breed name from one-part and two-part names
   const showDoggie = async dogName => {
@@ -41,6 +30,7 @@ function SearchDogs() {
       const twoPartName = dogName.split(' ');
       const [value1, value2] = twoPartName;
       const bigDog = await fetchBreedDogs(value1, value2);
+      console.log(bigDog);
       setDoggie(bigDog);
     } else {
       const dog = await fetchDogs(adjustedSearch);
