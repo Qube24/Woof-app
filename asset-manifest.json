@@ -1,27 +1,21 @@
 {
   "files": {
-    "main.css": "/woof-app/static/css/main.7acaea2f.css",
-    "main.js": "/woof-app/static/js/main.4f6c4fad.js",
-    "static/css/785.792222e3.chunk.css": "/woof-app/static/css/785.792222e3.chunk.css",
-    "static/js/785.f8e20e52.chunk.js": "/woof-app/static/js/785.f8e20e52.chunk.js",
-    "static/css/725.b19ae221.chunk.css": "/woof-app/static/css/725.b19ae221.chunk.css",
-    "static/js/725.7a887aed.chunk.js": "/woof-app/static/js/725.7a887aed.chunk.js",
-    "static/css/894.0f10a91d.chunk.css": "/woof-app/static/css/894.0f10a91d.chunk.css",
-    "static/js/894.1e1d0c91.chunk.js": "/woof-app/static/js/894.1e1d0c91.chunk.js",
-    "static/js/315.7fbfa9d3.chunk.js": "/woof-app/static/js/315.7fbfa9d3.chunk.js",
+    "main.css": "/woof-app/static/css/main.238131c4.css",
+    "main.js": "/woof-app/static/js/main.b5f4e67d.js",
+    "static/js/740.2ddd8300.chunk.js": "/woof-app/static/js/740.2ddd8300.chunk.js",
+    "static/js/258.2d25822e.chunk.js": "/woof-app/static/js/258.2d25822e.chunk.js",
+    "static/js/366.eb18889a.chunk.js": "/woof-app/static/js/366.eb18889a.chunk.js",
+    "static/js/767.815d24b9.chunk.js": "/woof-app/static/js/767.815d24b9.chunk.js",
     "index.html": "/woof-app/index.html",
-    "main.7acaea2f.css.map": "/woof-app/static/css/main.7acaea2f.css.map",
-    "main.4f6c4fad.js.map": "/woof-app/static/js/main.4f6c4fad.js.map",
-    "785.792222e3.chunk.css.map": "/woof-app/static/css/785.792222e3.chunk.css.map",
-    "785.f8e20e52.chunk.js.map": "/woof-app/static/js/785.f8e20e52.chunk.js.map",
-    "725.b19ae221.chunk.css.map": "/woof-app/static/css/725.b19ae221.chunk.css.map",
-    "725.7a887aed.chunk.js.map": "/woof-app/static/js/725.7a887aed.chunk.js.map",
-    "894.0f10a91d.chunk.css.map": "/woof-app/static/css/894.0f10a91d.chunk.css.map",
-    "894.1e1d0c91.chunk.js.map": "/woof-app/static/js/894.1e1d0c91.chunk.js.map",
-    "315.7fbfa9d3.chunk.js.map": "/woof-app/static/js/315.7fbfa9d3.chunk.js.map"
+    "main.238131c4.css.map": "/woof-app/static/css/main.238131c4.css.map",
+    "main.b5f4e67d.js.map": "/woof-app/static/js/main.b5f4e67d.js.map",
+    "740.2ddd8300.chunk.js.map": "/woof-app/static/js/740.2ddd8300.chunk.js.map",
+    "258.2d25822e.chunk.js.map": "/woof-app/static/js/258.2d25822e.chunk.js.map",
+    "366.eb18889a.chunk.js.map": "/woof-app/static/js/366.eb18889a.chunk.js.map",
+    "767.815d24b9.chunk.js.map": "/woof-app/static/js/767.815d24b9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7acaea2f.css",
-    "static/js/main.4f6c4fad.js"
+    "static/css/main.238131c4.css",
+    "static/js/main.b5f4e67d.js"
   ]
 }
