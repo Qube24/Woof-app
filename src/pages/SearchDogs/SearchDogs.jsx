@@ -30,10 +30,17 @@ function SearchDogs() {
       const twoPartName = dogName.split(' ');
       const [value1, value2] = twoPartName;
       const bigDog = await fetchBreedDogs(value1, value2);
+      if (bigDog.status === 'error') {
+        Notiflix.Notify.failure('Please enter the breed name of dog');
+      }
       console.log(bigDog);
       setDoggie(bigDog);
     } else {
       const dog = await fetchDogs(adjustedSearch);
+      console.log(dog.status);
+      if (dog.status === 'error') {
+        Notiflix.Notify.failure('Please enter the breed name of dog');
+      }
       setDoggie(dog);
     }
   };
@@ -42,7 +49,13 @@ function SearchDogs() {
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
-    setSearchParams({ value: form.elements.searchInput.value });
+    const value = e.target[0].value;
+    // setSearchParams({ value: form.elements.searchInput.value });
+    setSearchParams({ value: value });
+    console.log(e.target[0].value);
+    if (value === '') {
+      return Notiflix.Notify.warning('Please enter the breed name of dog');
+    }
     form.reset();
   };
 
@@ -55,7 +68,6 @@ function SearchDogs() {
   const backLinkHref = location.state?.from ?? '/searchDogs';
 
   if (doggie.status === 'error') {
-    Notiflix.Notify.failure('Qui timide rogat docet negare');
     return (
       <div>
         <form onSubmit={handleSubmit} className={css.form}>
