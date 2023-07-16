@@ -9,9 +9,13 @@ export const fetchDogsList = async () => {
 // fetch function to search for dogs with one-part name
 
 export const fetchDogs = async value => {
-  const res = await fetch(`https://dog.ceo/api/breed/${value}/images/random`);
-  const searchDogsJson = await res.json();
-  return searchDogsJson;
+  if (value === '') {
+    return;
+  } else {
+    const res = await fetch(`https://dog.ceo/api/breed/${value}/images/random`);
+    const searchDogsJson = await res.json();
+    return searchDogsJson;
+  }
 };
 
 // fetch function to search for dogs with two-part name

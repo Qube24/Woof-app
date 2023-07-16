@@ -31,30 +31,28 @@ function SearchDogs() {
       const [value1, value2] = twoPartName;
       const bigDog = await fetchBreedDogs(value1, value2);
       if (bigDog.status === 'error') {
-        Notiflix.Notify.failure('Please enter the breed name of dog');
+        Notiflix.Notify.failure('There is no such breed of dog');
       }
       console.log(bigDog);
       setDoggie(bigDog);
     } else {
       const dog = await fetchDogs(adjustedSearch);
-      console.log(dog.status);
+
       if (dog.status === 'error') {
-        Notiflix.Notify.failure('Please enter the breed name of dog');
+        Notiflix.Notify.failure('There is no such breed of dog');
       }
       setDoggie(dog);
     }
   };
 
-  //  Seatch event handler
+  //  Search event handler
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
     const value = e.target[0].value;
-    // setSearchParams({ value: form.elements.searchInput.value });
     setSearchParams({ value: value });
-    console.log(e.target[0].value);
     if (value === '') {
-      return Notiflix.Notify.warning('Please enter the breed name of dog');
+      return Notiflix.Notify.warning('Please enter dog breed to continue');
     }
     form.reset();
   };
@@ -64,10 +62,9 @@ function SearchDogs() {
     return 'Loading';
   }
 
-  // go back buttton hook
+  // go back button hook
   const backLinkHref = location.state?.from ?? '/searchDogs';
-
-  if (doggie.status === 'error') {
+  if (search === '' || doggie.status === 'error') {
     return (
       <div>
         <form onSubmit={handleSubmit} className={css.form}>
@@ -75,7 +72,7 @@ function SearchDogs() {
             type="text"
             name="searchInput"
             className={css.searchBar}
-            placeholder="example: bulldog"
+            placeholder="Example: bulldog french"
           />
           <button type="submit" className={css.searchBtn}>
             Search
