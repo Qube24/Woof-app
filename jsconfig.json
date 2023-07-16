@@ -1,0 +1,6 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src"
+  },
+  "include": ["src", "src/components/pages/Home", "src/pages/SearchDogs"]
+}
