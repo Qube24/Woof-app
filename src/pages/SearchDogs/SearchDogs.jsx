@@ -62,6 +62,7 @@ function SearchDogs() {
   const backLinkHref = location.state?.from ?? '/searchDogs';
 
   if (doggie.status === 'error') {
+    console.log(doggie);
     return (
       <div>
         <form onSubmit={handleSubmit} className={css.form}>
