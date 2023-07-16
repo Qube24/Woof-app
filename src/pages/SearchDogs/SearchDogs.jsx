@@ -3,7 +3,7 @@ import { fetchDogs, fetchBreedDogs } from 'components/fetchApi';
 import { Outlet, useSearchParams, useLocation } from 'react-router-dom';
 import Notiflix from 'notiflix';
 import { BackLink } from 'components/BackLink/BackLink';
-import css from './SearchDogsStyle.module.css';
+import { Box, TextField, Button, Typography } from '@mui/material/';
 
 function SearchDogs() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -33,7 +33,7 @@ function SearchDogs() {
       if (bigDog.status === 'error') {
         Notiflix.Notify.failure('There is no such breed of dog');
       }
-      console.log(bigDog);
+
       setDoggie(bigDog);
     } else {
       const dog = await fetchDogs(adjustedSearch);
@@ -64,59 +64,96 @@ function SearchDogs() {
 
   // go back button hook
   const backLinkHref = location.state?.from ?? '/searchDogs';
+
   if (search === '' || doggie.status === 'error') {
     return (
-      <div>
-        <form onSubmit={handleSubmit} className={css.form}>
-          <input
-            type="text"
-            name="searchInput"
-            className={css.searchBar}
+      <Box sx={{ height: 820 }}>
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+            id="outlined-textarea"
+            label="Enter breed of a dog"
             placeholder="Example: bulldog french"
+            sx={{
+              width: 300,
+              height: 'auto',
+              borderColor: 'white',
+            }}
           />
-          <button type="submit" className={css.searchBtn}>
-            Search
-          </button>
-        </form>
-      </div>
+          <Button
+            variant="contained"
+            type="submit"
+            sx={{
+              bgcolor: 'background.secondary',
+              color: 'text.secondary',
+              fontWeight: 600,
+              my: 1,
+              mx: 2,
+              ':hover': {
+                bgcolor: 'background.third',
+                color: 'text.primary',
+              },
+            }}
+          >
+            Find
+          </Button>
+        </Box>
+      </Box>
     );
   } else if (doggie.status === 'success') {
     return (
-      <div>
-        <div className={css.container}>
+      <Box sx={{ height: 824 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'left' }}>
           <BackLink to={backLinkHref}>
-            <button type="button" className={css.backBtn}>
+            <Button
+              variant="contained"
+              type="button"
+              sx={{
+                bgcolor: 'background.secondary',
+                color: 'text.secondary',
+                fontWeight: 600,
+                my: 1,
+                mx: 2,
+                ':hover': {
+                  bgcolor: 'background.third',
+                  color: 'text.primary',
+                },
+              }}
+            >
               Go Back
-            </button>
+            </Button>
           </BackLink>
-
-          <h1>{adjustedSearch}</h1>
-
-          <img
-            src={doggie.message}
-            alt={adjustedSearch}
-            className={css.poster}
-          />
-
-          <p className={css.infoText}>
-            Ten pies to wierny i przyjacielski czworonóg, który świetnie czuje
-            się w roli rodzinnego towarzysza. Dobrze dogaduje się z dziećmi,
-            uwielbia pieszczoty i wspólne zabawy. Jest łatwy w prowadzeniu, choć
-            bywa uparty. Sprawdzi się zarówno w małym mieszkaniu jak i w domu z
-            ogrodem.
-          </p>
-          <p className={css.infoText}>
-            Wysokość w kłębie 30-35 cm, masa ciała 22-25 kg. Sierść krótka,
-            delikatna, lśniąca, umaszczenie płowe, pręgowane lub łaciate.
-            Charakter czujny, śmiały, oddany, odważny, łagodny, czasem uparty. W
-            zależności od dnia pokazuje różne oblicza swojej natury.
-          </p>
-        </div>
+        </Box>
+        <Typography variant="h2" sx={{ py: 2, color: 'text.primary' }}>
+          {adjustedSearch.toUpperCase()}
+        </Typography>
+        <Box
+          component="img"
+          sx={{
+            height: 350,
+            width: 350,
+            borderRadius: '50%',
+          }}
+          src={doggie.message}
+          alt={adjustedSearch}
+        />
+        <Typography variant="h6" sx={{ py: 2, color: 'text.primary' }}>
+          Ten pies to wierny i przyjacielski czworonóg, który świetnie czuje się
+          w roli rodzinnego towarzysza. Dobrze dogaduje się z dziećmi, uwielbia
+          pieszczoty i wspólne zabawy. Jest łatwy w prowadzeniu, choć bywa
+          uparty. Sprawdzi się zarówno w małym mieszkaniu jak i w domu z
+          ogrodem.
+        </Typography>
+        <Typography variant="h6" sx={{ color: 'text.primary' }}>
+          Wysokość w kłębie 30-35 cm, masa ciała 22-25 kg. Sierść krótka,
+          delikatna, lśniąca, umaszczenie płowe, pręgowane lub łaciate.
+          Charakter czujny, śmiały, oddany, odważny, łagodny, czasem uparty. W
+          zależności od dnia pokazuje różne oblicza swojej natury.
+        </Typography>
         <Suspense fallback={<div>Loading...</div>}>
           <Outlet />
         </Suspense>
         <Outlet />
-      </div>
+      </Box>
     );
   }
 }

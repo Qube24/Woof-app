@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Outlet, Link } from 'react-router-dom';
 import { fetchDogsList } from 'components/fetchApi';
-import css from './homeStyle.module.css';
+import { Box, Typography, List, ListItem } from '@mui/material/';
 
 function Home() {
   // hook for setting list of dogs by breed
@@ -29,16 +29,42 @@ function Home() {
 
   return (
     <div>
-      <h2 className={css.pageTitle}>Breed Lists</h2>
-      <ul className={css.list}>
-        {fullDataDogs.map((el, index) => (
-          <Link to={`/dog/${el}`} key={index}>
-            <li key={index} className={css.link}>
-              {el}
-            </li>
-          </Link>
-        ))}
-      </ul>
+      <Typography variant="h3" sx={{ my: 2, color: 'text.primary' }}>
+        BREED LIST
+      </Typography>
+      <Box sx={{ textAlign: 'left' }}>
+        <List
+          sx={{
+            display: 'inline-block',
+            textAlign: 'left',
+          }}
+        >
+          {fullDataDogs.map((el, index) => (
+            <ListItem
+              key={index}
+              sx={{ my: 1, fontSize: 30, textDecoration: 'none' }}
+            >
+              <Link
+                to={`/dog/${el}`}
+                key={index}
+                style={{ textDecoration: 'none' }}
+              >
+                <Typography
+                  variant="BUTTON"
+                  sx={{
+                    color: 'text.primary',
+                    ':hover': {
+                      color: 'text.secondary',
+                    },
+                  }}
+                >
+                  {el.toUpperCase()}
+                </Typography>
+              </Link>
+            </ListItem>
+          ))}
+        </List>
+      </Box>
       <Outlet />
     </div>
   );

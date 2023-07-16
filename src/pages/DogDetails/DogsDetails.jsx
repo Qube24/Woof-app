@@ -1,9 +1,8 @@
-import css from './movieDetalisStyle.module.css';
 import { fetchDogs, fetchBreedDogs } from 'components/fetchApi';
 import { useEffect, useState, Suspense } from 'react';
 import { useParams, Outlet, useLocation } from 'react-router-dom';
 import { BackLink } from 'components/BackLink/BackLink';
-import { Notiflix } from 'notiflix';
+import { Box, Button, Typography } from '@mui/material/';
 
 const DogDetails = () => {
   const { dogName } = useParams();
@@ -33,33 +32,59 @@ const DogDetails = () => {
   const backLinkHref = location.state?.from ?? '/';
 
   return (
-    <div className={css.container}>
-      <BackLink to={backLinkHref}>
-        <button type="button" className={css.backBtn}>
-          Go Back
-        </button>
-      </BackLink>
+    <Box sx={{}}>
+      <Box sx={{ display: 'flex', justifyContent: 'left' }}>
+        <BackLink to={backLinkHref}>
+          <Button
+            variant="contained"
+            type="button"
+            sx={{
+              bgcolor: 'background.secondary',
+              color: 'text.secondary',
+              fontWeight: 600,
+              my: 1,
+              mx: 2,
+              ':hover': {
+                bgcolor: 'background.third',
+                color: 'text.primary',
+              },
+            }}
+          >
+            Go Back
+          </Button>
+        </BackLink>
+      </Box>
+      <Typography variant="h4" sx={{ py: 2, color: 'text.primary' }}>
+        {dogName.toUpperCase()}
+      </Typography>
 
-      <h1>{dogName}</h1>
+      <Box
+        component="img"
+        sx={{
+          height: 300,
+          width: 300,
+          borderRadius: '50%',
+        }}
+        src={doggie.message}
+        alt={dogName}
+      />
 
-      <img src={doggie.message} alt={dogName} className={css.poster} />
-
-      <p className={css.infoText}>
+      <Typography variant="h6" sx={{ py: 2, color: 'text.primary' }}>
         Ten pies to wierny i przyjacielski czworonóg, który świetnie czuje się w
         roli rodzinnego towarzysza. Dobrze dogaduje się z dziećmi, uwielbia
         pieszczoty i wspólne zabawy. Jest łatwy w prowadzeniu, choć bywa uparty.
         Sprawdzi się zarówno w małym mieszkaniu jak i w domu z ogrodem.
-      </p>
-      <p className={css.infoText}>
+      </Typography>
+      <Typography variant="h6" sx={{ color: 'text.primary' }}>
         Wysokość w kłębie 30-35 cm, masa ciała 22-25 kg. Sierść krótka,
         delikatna, lśniąca, umaszczenie płowe, pręgowane lub łaciate. Charakter
         czujny, śmiały, oddany, odważny, łagodny, czasem uparty. W zależności od
         dnia pokazuje różne oblicza swojej natury.
-      </p>
+      </Typography>
       <Suspense fallback={<div>Loading...</div>}>
         <Outlet />
       </Suspense>
-    </div>
+    </Box>
   );
 };
 
