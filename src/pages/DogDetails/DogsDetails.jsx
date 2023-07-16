@@ -42,12 +42,7 @@ const DogDetails = () => {
 
       <h1>{dogName}</h1>
 
-      <img
-        // src is different depends on one-part and two-part breed names
-        src={doggie.message}
-        alt={dogName}
-        className={css.poster}
-      />
+      <img src={doggie.message} alt={dogName} className={css.poster} />
 
       <p className={css.infoText}>
         Ten pies to wierny i przyjacielski czworonóg, który świetnie czuje się w

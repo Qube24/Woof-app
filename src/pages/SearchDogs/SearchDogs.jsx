@@ -15,21 +15,25 @@ function SearchDogs() {
   const adjustedSearch = search.trim().toLowerCase();
 
   // componentDidUpdate
-  useEffect(() => {
-    showDoggie(adjustedSearch);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [adjustedSearch]);
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-
   // useEffect(() => {
-  //   if (isFirstRender) {
-  //     setIsFirstRender(false);
-  //   } else {
-  //     showDoggie(adjustedSearch);
-  //   }
+  //   // checking if search return 404 error
+  //   // if (adjustedSearch === '' || adjustedSearch === null) {
+  //   //   return;
+  //   // } else {
+  //   //   showDoggie(adjustedSearch);
+  //   // }
+
+  //   showDoggie(adjustedSearch);
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [adjustedSearch, isFirstRender]);
+  // }, [adjustedSearch]);
+
+  useEffect(() => {
+    if (isFirstRender) {
+      setIsFirstRender(false);
+    } else {
+      showDoggie(adjustedSearch);
+    }
+  }, [adjustedSearch, isFirstRender]);
 
   // function to distinguish breed name from one-part and two-part names
   const showDoggie = async dogName => {
@@ -40,7 +44,6 @@ function SearchDogs() {
       setDoggie(bigDog);
     } else {
       const dog = await fetchDogs(adjustedSearch);
-
       setDoggie(dog);
     }
   };
@@ -62,7 +65,7 @@ function SearchDogs() {
   const backLinkHref = location.state?.from ?? '/searchDogs';
 
   if (doggie.status === 'error') {
-    console.log(doggie);
+    Notiflix.Notify.failure('Qui timide rogat docet negare');
     return (
       <div>
         <form onSubmit={handleSubmit} className={css.form}>
@@ -91,7 +94,6 @@ function SearchDogs() {
           <h1>{adjustedSearch}</h1>
 
           <img
-            // src is different depends on one-part and two-part breed names
             src={doggie.message}
             alt={adjustedSearch}
             className={css.poster}
